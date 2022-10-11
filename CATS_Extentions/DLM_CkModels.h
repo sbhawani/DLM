@@ -89,6 +89,7 @@ double Lednicky_gauss_pAL_varlow(const double &Momentum, const double* SourcePar
     void SetLedniIntegral_SourceClass(void* context, const unsigned& numparameters=0);
     void RemoveLedniIntegral_SourceFunction();
     void RemoveLedniIntegral_SourceClass();
+    double LednickyOnlyForPdLD(const double& Momentum, const double* SourcePar, const double* PotPar);
 
 
 #endif

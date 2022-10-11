@@ -31,6 +31,13 @@ DLM_Histo<complex<double>>*** Init_pK0_Kyoto2019(const char* InputFolder, CATS& 
 DLM_Histo<complex<double>>*** InitHaidenbauerKaonPlus(const char* InputFolder, CATS& Kitty, const int& TYPE);
 
 DLM_Histo<complex<double>>*** Init_pd_Sebastian(const char* InputFolder, CATS& Kitty, const int& TYPE=0, const int& CUTOFF=400);
+DLM_Histo<complex<double>>*** Init_pd_SebastianNewNLO(const char* InputFolder, CATS& Kitty, const int& TYPE=0, const int& CUTOFF=400);
+DLM_Histo<complex<double>>*** Init_pd_SebastianNewNLO(const char* InputFolder, CATS *Kitty, const int& TYPE=0, const int& CUTOFF=400);
+DLM_Histo<complex<double>>*** Init_pd_SebastianNew(const char* InputFolder, CATS* Kitty, const int& TYPE=0, const int& CUTOFF=400);
+DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* InputFolder, CATS* Kitty, const int& TYPE=0, const int& CUTOFF=400,const int& nWAVE=0);
+DLM_Histo<complex<double>>*** Init_pd_SebastianNewThreebody(const char* InputFolder, CATS* Kitty, const int& TYPE=0, const int& CUTOFF=400 , const int& BEnrgy=18);
+
+DLM_Histo<complex<double>>*** Init_pd_PISAPlaneWave(const char* InputFolder, CATS* Kitty);
 
 DLM_Histo<complex<double>>*** Init_pDminus_Haidenbauer(const char* InputFolder, CATS& Kitty, const int& TYPE=0);
 DLM_Histo<complex<double>>*** Init_pDminus_Haidenbauer(const char* InputFolder, CATS* Kitty, const int& TYPE=0);

@@ -1129,3 +1129,34 @@ double Lednicky_CC_LAL(const double &Momentum, const double* SourcePar, const do
 //     //if(par[1] == 0.) return 1. + par[2]*(par[3]*corr_fin -1.); //this is with baseline
 //     //else return par[2]*(par[3]*corr_fin -1.);//this is baseline subtracted
  }
+
+
+double LendickyPd_LD(const double& Momentum, const double& GaussR,
+                     const double& ScattLenDoub, const double& EffRangeDoub,
+                     const double& ScattLenQuart, const double& EffRangeQuart,
+                     const bool& DoubletOnly, const bool& InverseScatLen,
+                     const double& Weight1, const double& Weight2){
+     if(GaussR!=GaussR){
+             printf("\033[1;33mWARNING:\033[0m GeneralLednicky got a bad value for the Radius (nan). Returning default value of 1.\n");
+             return 1;
+         }
+     const double Radius = GaussR*FmToNu;
+     const double IsLen1 = 1.0/(ScattLenDoub*FmToNu);
+     const double eRan1 = EffRangeDoub*FmToNu;
+     const double IsLen3 = 1./(ScattLenQuart*FmToNu+1e-64);
+     const double eRan3 = EffRangeQuart*FmToNu;
+     double F1 = gsl_sf_dawson(2.*Momentum*Radius)/(2.*Momentum*Radius);
+     double F2 = (1.-exp(-4.*Momentum*Momentum*Radius*Radius))/(2.*Momentum*Radius);
+     complex<double> ScattAmplDoub = pow(-IsLen1 + 0.5*eRan1*Momentum*Momentum-i*Momentum,-1.);
+     complex<double> ScattAmplQuart = pow(-IsLen3 + 0.5*eRan3*Momentum*Momentum-i*Momentum,-1.);
+     double CkValue = 0.0;
+     CkValue += Weight1*(0.5*pow(abs(ScattAmplDoub)/Radius,2.0)*(1.-(eRan1)/(2*sqrt(Pi)*Radius))+
+               2*real(ScattAmplDoub)*F1/(sqrt(Pi)*Radius)-imag(ScattAmplDoub)*F2/Radius);
+     CkValue += Weight2*(0.5*pow(abs(ScattAmplQuart)/Radius,2.0)*(1-(eRan3)/(2*sqrt(Pi)*Radius))+
+               2*real(ScattAmplQuart)*F1/(sqrt(Pi)*Radius)-imag(ScattAmplQuart)*F2/Radius);
+     CkValue += 1;
+     return CkValue;
+}
+ double LednickyOnlyForPdLD(const double& Momentum, const double* SourcePar, const double* PotPar){
+  return LendickyPd_LD(Momentum,SourcePar[0],PotPar[0],PotPar[1],PotPar[2],PotPar[3],false,false,PotPar[4],PotPar[5]);
+}

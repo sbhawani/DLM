@@ -10,11 +10,11 @@ SET(PROJECT_NAME "CATS")
 
 project(${PROJECT_NAME})
 # SET PATHS #
-SET(CATS_DESTINATION "/home/dmihaylov/Apps/CATS")#where to install CATS. Folder must exist.
-SET(ROOT_PATH "/home/dmihaylov/Apps/root-6.14.00/obj")#path to ROOT
-SET(GSL_INCLUDE "/usr/include/gsl")#where are all GSL related .h files
-SET(GSL_LIB "/usr/lib")#where are the GSL .a and .so files
-SET(CATS_FOLDER "/home/dmihaylov/Dudek_Ubuntu/DLM_GitHub")#where is the CATS main folder located
+SET(CATS_DESTINATION "/home/sbhawani/Softwares/CATS/install")#where to install CATS. Folder must exist.
+SET(ROOT_PATH "/home/sbhawani/Softwares/ROOT/installdir")#path to ROOT
+SET(GSL_INCLUDE "/usr/local/include/gsl/")#where are all GSL related .h files
+SET(GSL_LIB "/usr/lib/")#where are the GSL .a and .so files
+SET(CATS_FOLDER "/home/sbhawani/Softwares/CATS/source")#where is the CATS main folder located
 # DO NOT CHANGE THE REST #
 
 SET(VERSION_MAJOR 3)
@@ -33,7 +33,9 @@ include_directories(${ROOT_PATH}/include)
 add_library(CATSbasic SHARED 		${CATS_FOLDER}/CATS/CATS.cpp
 					${CATS_FOLDER}/CATS/CATStools.cpp
 					${CATS_FOLDER}/DLM_CppTools/DLM_CppTools.cpp
-					${CATS_FOLDER}/DLM_MathTools/DLM_Histo.cpp)
+					${CATS_FOLDER}/DLM_MathTools/DLM_Histo.cpp
+					${CATS_FOLDER}/DLM_RootTools/DLM_RootWrapper.cpp
+					${CATS_FOLDER}/DLM_MathTools/DLM_Unfold.cpp)
 add_library(CATSextended SHARED 	${CATS_FOLDER}/DLM_RootTools/DLM_CRAB_PM.cpp
 					${CATS_FOLDER}/DLM_MathTools/DLM_Integration.cpp
 					${CATS_FOLDER}/DLM_MathTools/DLM_Random.cpp
@@ -53,7 +55,7 @@ add_library(CATSdev	SHARED		${CATS_FOLDER}/CATS_Extentions/DLM_CkDecomposition.c
 					${CATS_FOLDER}/DLM_RootTools/DLM_DrawingTools.cpp
 					${CATS_FOLDER}/DLM_RootTools/DLM_HistoAnalysis.cpp
 					${CATS_FOLDER}/DLM_RootTools/DLM_RootWrapper.cpp
-          				${CATS_FOLDER}/DLM_RootTools/DLM_MultiFit.cpp
+          			${CATS_FOLDER}/DLM_RootTools/DLM_MultiFit.cpp
 					${CATS_FOLDER}/DLM_RootTools/DLM_DecayMatrix.cpp
 					${CATS_FOLDER}/DLM_RootTools/DLM_RootFit.cpp)
 
@@ -86,6 +88,7 @@ install (FILES ${CATS_FOLDER}/DLM_RootTools/DLM_CRAB_PM.h DESTINATION ${CATS_DES
 install (FILES ${CATS_FOLDER}/DLM_MathTools/DLM_Integration.h DESTINATION ${CATS_DESTINATION}/include)
 install (FILES ${CATS_FOLDER}/DLM_MathTools/DLM_Random.h DESTINATION ${CATS_DESTINATION}/include)
 install (FILES ${CATS_FOLDER}/DLM_MathTools/DLM_Histo.h DESTINATION ${CATS_DESTINATION}/include)
+install (FILES ${CATS_FOLDER}/DLM_MathTools/DLM_Unfold.h DESTINATION ${CATS_DESTINATION}/include)
 install (FILES ${CATS_FOLDER}/DLM_MathTools/DLM_Bessel.h DESTINATION ${CATS_DESTINATION}/include)
 install (FILES ${CATS_FOLDER}/DLM_MathTools/DLM_MathFunctions.h DESTINATION ${CATS_DESTINATION}/include)
 install (FILES ${CATS_FOLDER}/CATS_Extentions/DLM_Ck.h DESTINATION ${CATS_DESTINATION}/include)

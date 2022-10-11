@@ -69,8 +69,8 @@ DLM_Unfold::~DLM_Unfold(){
   if(dlmDimiWorkHorse){delete dlmDimiWorkHorse; dlmDimiWorkHorse=NULL;}
   if(hData){delete hData; hData=NULL;}
   if(hResponse){delete hResponse; hResponse=NULL;}
-  if(BinByBinFolded){delete BinByBinFolded; BinByBinFolded=NULL;}
-  if(BinByBinUnfolded){delete BinByBinUnfolded; BinByBinUnfolded=NULL;}
+  if(BinByBinFolded){delete [] BinByBinFolded; BinByBinFolded=NULL;}
+  if(BinByBinUnfolded){delete [] BinByBinUnfolded; BinByBinUnfolded=NULL;}
 }
 
 void DLM_Unfold::SetData(TH1F* data){
