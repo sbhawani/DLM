@@ -5031,19 +5031,19 @@ DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* Input
         for(unsigned uMomBin=0; uMomBin<NumMomBins; uMomBin++){
             FileNameS[uCh][uMomBin] = new char [512];
             strcpy(FileNameS[uCh][uMomBin],InputFolder);
-            if(uCh==0) strcat(FileNameS[uCh][uMomBin],"Wf-nd-D-S-full-eta0p1/");
-            else strcat(FileNameS[uCh][uMomBin],"Wf-nd-Q-S-full-eta0p1/");
+            if(uCh==0) strcat(FileNameS[uCh][uMomBin],"Wf-pd-D-S-full-eta0p1/");
+            else strcat(FileNameS[uCh][uMomBin],"Wf-pd-Q-S-full-eta0p1/");
 
-            strcat(FileNameS[uCh][uMomBin],"Wf-nd-");
+            strcat(FileNameS[uCh][uMomBin],"Wf-pd-");
             if(uCh==0) strcat(FileNameS[uCh][uMomBin],"D-k");
             else strcat(FileNameS[uCh][uMomBin],"Q-k");
             sprintf(cdummy,"%.f-",MomBinCenter[uMomBin]);
             strcat(FileNameS[uCh][uMomBin],cdummy);
             sprintf(cdummy,"L%i",CUTOFF);
             strcat(FileNameS[uCh][uMomBin],cdummy);
-            if(TYPE==0){strcat(FileNameS[uCh][uMomBin],".dat");}
-            else if (TYPE==1){strcat(FileNameS[uCh][uMomBin],".dat");}
-            else {strcat(FileNameS[uCh][uMomBin],".dat");}
+            if(TYPE==0){strcat(FileNameS[uCh][uMomBin],"-l0p5.dat");}
+            else if (TYPE==1){strcat(FileNameS[uCh][uMomBin],"-l0p5.dat");}
+            else {strcat(FileNameS[uCh][uMomBin],"-l0p5.dat");}
         }
     }
 
@@ -5054,19 +5054,42 @@ DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* Input
         for(unsigned uMomBin=0; uMomBin<NumMomBins; uMomBin++){
             FileNameP[uCh][uMomBin] = new char [512];
             strcpy(FileNameP[uCh][uMomBin],InputFolder);
-            if(uCh==0) strcat(FileNameP[uCh][uMomBin],"Wf-nd-D-P-full-eta0p1/");
-            else strcat(FileNameP[uCh][uMomBin],"Wf-nd-Q-P-full-eta0p1/");
+            if(uCh==0) strcat(FileNameP[uCh][uMomBin],"Wf-pd-D-P-full-eta0p1/");
+            else strcat(FileNameP[uCh][uMomBin],"Wf-pd-Q-P-full-eta0p1/");
 
-            strcat(FileNameP[uCh][uMomBin],"Wf-nd-");
+            strcat(FileNameP[uCh][uMomBin],"Wf-pd-");
             if(uCh==0) strcat(FileNameP[uCh][uMomBin],"D-k");
             else strcat(FileNameP[uCh][uMomBin],"Q-k");
             sprintf(cdummy,"%.f-",MomBinCenter[uMomBin]);
             strcat(FileNameP[uCh][uMomBin],cdummy);
             sprintf(cdummy,"L%i",CUTOFF);
             strcat(FileNameP[uCh][uMomBin],cdummy);
-            if(TYPE==0){strcat(FileNameP[uCh][uMomBin],".dat");}
-            else if (TYPE==1){strcat(FileNameP[uCh][uMomBin],".dat");}
-            else {strcat(FileNameP[uCh][uMomBin],".dat");}
+            if(TYPE==0){strcat(FileNameP[uCh][uMomBin],"-l0p5.dat");}
+            else if (TYPE==1){strcat(FileNameP[uCh][uMomBin],"-l0p5.dat");}
+            else {strcat(FileNameP[uCh][uMomBin],"-l0p5.dat");}
+        }
+    }
+
+    char*** FileNameD;
+    FileNameD = new char** [NumChannels];
+    for(unsigned uCh=0; uCh<NumChannels; uCh++){
+        FileNameD[uCh] = new char* [NumMomBins];
+        for(unsigned uMomBin=0; uMomBin<NumMomBins; uMomBin++){
+            FileNameD[uCh][uMomBin] = new char [512];
+            strcpy(FileNameD[uCh][uMomBin],InputFolder);
+            if(uCh==0) strcat(FileNameD[uCh][uMomBin],"Wf-pd-D-D-full-eta0p1/");
+            else strcat(FileNameD[uCh][uMomBin],"Wf-pd-Q-D-full-eta0p1/");
+
+            strcat(FileNameD[uCh][uMomBin],"Wf-pd-");
+            if(uCh==0) strcat(FileNameD[uCh][uMomBin],"D-k");
+            else strcat(FileNameD[uCh][uMomBin],"Q-k");
+            sprintf(cdummy,"%.f-",MomBinCenter[uMomBin]);
+            strcat(FileNameD[uCh][uMomBin],cdummy);
+            sprintf(cdummy,"L%i",CUTOFF);
+            strcat(FileNameD[uCh][uMomBin],cdummy);
+            if(TYPE==0){strcat(FileNameD[uCh][uMomBin],"-l0p5.dat");}
+            else if (TYPE==1){strcat(FileNameD[uCh][uMomBin],"-l0p5.dat");}
+            else {strcat(FileNameD[uCh][uMomBin],"-l0p5.dat");}
         }
     }
     //how many lines to skip at the beginning of each file
@@ -5076,8 +5099,8 @@ DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* Input
     float fWfRe;
     float fWfIm;
     Kitty->SetNumChannels(NumChannels);
-    Kitty->SetNumPW(0,2);
-    Kitty->SetNumPW(1,2);
+    Kitty->SetNumPW(0,3);
+    Kitty->SetNumPW(1,3);
     Kitty->SetChannelWeight(0,1./3.);
     Kitty->SetChannelWeight(1,2./3.);
     //dummy values
@@ -5096,6 +5119,7 @@ DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* Input
 
     FILE *InFileS;
     FILE *InFileP;
+    FILE *InFileD;
     FILE *InFile;
     InFileS = fopen(FileNameS[0][0], "r");
     if(!InFileS){
@@ -5118,36 +5142,14 @@ DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* Input
         CurrentLine++;
     }
     fclose(InFileS);
-/*
-    //---------------------------------------------------------------------------------------
-    InFileP = fopen(FileNameP[0][0], "r");
-    if(!InFileP){
-        printf("\033[1;31mERROR:\033[0m The file\033[0m %s cannot be opened!\n", FileNameP[0][0]);
-        return NULL;
-    }
-    CurrentLine=0;
-    RadBins[0] = 0;
-    while(!feof(InFileP)){//line by line
-        if(!fgets(cdummy, 511, InFileP)) continue;//get a single line into cdummy
-        if(CurrentLine<NumDummyLines){CurrentLine++; continue;}
-        sscanf(cdummy, "%f %f %f",&fRadius,&fWfRe,&fWfIm);
-        RadBinCenter[NumRadBins] = fRadius;
-        if(NumRadBins){
-            //set the bin range in between the last two bin centers
-            RadBins[NumRadBins] = 0.5*(RadBinCenter[NumRadBins]+RadBinCenter[NumRadBins-1]);
-        }
-        NumRadBins++;
-        CurrentLine++;
-    }
-    fclose(InFileP);
-    //---------------------------------------------------------------------------------------
-*/
+
     //set the upper edge of the last bin, where we just add the bin width of the last bin
     //i.e. if we have l(low) c(center) u(up), we have that u=c+(c-l)=2c-l
     RadBins[NumRadBins] = 2.*RadBinCenter[NumRadBins-1]-RadBins[NumRadBins-1];
     DLM_Histo<complex<double>>*** Histo = new DLM_Histo<complex<double>>** [2];
     DLM_Histo<complex<double>>**& HistoWF = Histo[0];
     DLM_Histo<complex<double>>**& HistoPS = Histo[1];
+
     printf("problems seems to be here\n");
     HistoWF = new DLM_Histo<complex<double>>* [NumChannels];
     for(unsigned uCh=0; uCh<NumChannels; uCh++){
@@ -5183,10 +5185,17 @@ DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* Input
                   return NULL;
                 }
 
-              } else {
+              } else if (uPw == 1) {
                 InFile = fopen(FileNameP[uCh][uMomBin], "r");
                 if (!InFile) {
                   printf("\033[1;31mERROR:\033[0m The file\033[0m %s cannot be ""opened!\n",FileNameP[uCh][uMomBin]);
+                  return NULL;
+                }
+
+              }else {
+                InFile = fopen(FileNameD[uCh][uMomBin], "r");
+                if (!InFile) {
+                  printf("\033[1;31mERROR:\033[0m The file\033[0m %s cannot be ""opened!\n",FileNameD[uCh][uMomBin]);
                   return NULL;
                 }
               }
@@ -5227,8 +5236,16 @@ DLM_Histo<complex<double>>*** Init_pd_SebastianProjectionSwave(const char* Input
         }
         delete [] FileNameP[uCh];
     }
+
+    for(unsigned uCh=0; uCh<NumChannels; uCh++){
+        for(unsigned uMomBin=0; uMomBin<NumMomBins; uMomBin++){
+            delete [] FileNameD[uCh][uMomBin];
+        }
+        delete [] FileNameD[uCh];
+    }
     delete [] FileNameS;
     delete [] FileNameP;
+    delete [] FileNameD;
     delete [] RadBinCenter;
     delete [] RadBins;
     return Histo;
